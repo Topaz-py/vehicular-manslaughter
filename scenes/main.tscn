@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://player-dev.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/camera-pivot.gd" type="Script" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 30, 1, 30 )
@@ -10,18 +10,19 @@ extents = Vector3( 30, 1, 30 )
 size = Vector3( 60, 2, 60 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.176471, 0.188235, 0.211765, 1 )
+albedo_color = Color( 0.156863, 0.184314, 0.196078, 1 )
 
-[node name="dev-testing" type="Node"]
+[node name="main" type="Node"]
 
 [node name="ground" type="StaticBody" parent="."]
-transform = Transform( 15, 0, 0, 0, 1, 0, 0, 0, 15, 0, -1, 0 )
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )
 
-[node name="camera-pivot" type="Position3D" parent="ground"]
+[node name="camera-pivot" type="Spatial" parent="ground"]
 transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 1, 0 )
+script = ExtResource( 2 )
 
-[node name="Camera" type="Camera" parent="ground/camera-pivot"]
-transform = Transform( 0.0666667, 0, 0, 0, 0.0940721, 0.702405, 0, 1.49012e-08, 0.708676, 0, 9.66379, 9.33621 )
+[node name="camera" type="Camera" parent="ground/camera-pivot"]
+transform = Transform( 0.1, 0, 0, 0, 0.140719, 0.696561, 0, 0, 0.710633, 0, 9.82066, 9.17933 )
 projection = 1
 size = 19.0
 
@@ -37,4 +38,3 @@ transform = Transform( 1, 0, 0, 0, -0.459657, 0.888096, 0, -0.888096, -0.459657,
 shadow_enabled = true
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-script = ExtResource( 2 )
